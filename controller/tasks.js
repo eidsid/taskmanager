@@ -3,6 +3,7 @@ const getAllTasks = async(req, res) => {
     try {
         const tasks = await Task.find({});
         res.status(200).json(tasks)
+
     } catch (error) {
         res.status(500).send({ err: error.message })
 
@@ -10,7 +11,7 @@ const getAllTasks = async(req, res) => {
 }
 const createTask = async(req, res) => {
     try {
-        const task = await Task.create(req.body);
+        const task = await Task.create(req.body)
         res.status(201).json({ task })
     } catch (error) {
         res.status(500).send({ err: error.message })
@@ -19,7 +20,7 @@ const createTask = async(req, res) => {
 }
 const getTask = async(req, res) => {
     try {
-        const task = await Task.find({ completed: "true" });
+        const task = await Task.findById(req.params.id);
         if (!task) {
             res.status(404).send("task not exst")
         }

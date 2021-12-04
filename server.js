@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 const connectDB = require('./db/connect')
 app.use(express.json())
-
+    //middleware
+app.use(express.static('./public/'))
 app.get('/', (req, res) => {
 
     res.render("index", { name: "eid", id: 1 })
