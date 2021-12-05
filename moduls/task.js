@@ -6,7 +6,7 @@ const taskScema = mongoose.Schema({
         required: [true, "muste enter name"],
         trim: true,
         minLength: [3, 'name can not be less than 3 character'],
-        maxLength: [15, "max name can not be more 15 character"]
+        maxLength: [50, "max name can not be more 20 character"]
     },
     completed: {
         type: Boolean,

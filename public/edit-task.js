@@ -13,7 +13,7 @@ const showTask = async() => {
         const { data } = await axios.get(`/tasks/${id}`)
         const { _id: taskID, completed, name } = data
 
-        taskIDp.textContent = taskID || 'id not deffind'
+        taskIDp.textContent = taskID
         taskName.value = name;
         if (completed) {
             taskComplite.checked = true
@@ -26,11 +26,20 @@ showTask()
 
 taskform.addEventListener('submit', async(e) => {
     e.preventDefault()
-    const id = taskID.textContent
-    console.log(id);
+    const id = taskIDp.textContent
+    const completed = taskComplite.checked;
+    const name = taskName.value
     try {
-        await axios.patch(`/tasks/${id}`)
+        await axios.patch(`/tasks/${id}`, { completed, name })
+        formAlert.style.display = 'block'
+        formAlert.textContent = 'success, task updated'
+        formAlert.classList.add('text-success')
     } catch (error) {
+        formAlert.style.display = 'block'
+        formAlert.textContent = 'fail, task not updated'
 
     }
+    setTimeout(() => {
+        formAlert.style.display = 'none'
+    }, 2000)
 })
